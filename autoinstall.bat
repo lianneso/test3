@@ -26,7 +26,7 @@ if exist IguanaMainRepo xcopy IguanaMainRepo %wDir%\IguanaMainRepo /e /h /i /y
 if exist IguanaEnv.txt xcopy IguanaEnv.txt %wDir%
 
 echo 2. Download and Extract Iguana app files
-powershell -Command "(New-Object Net.WebClient).DownloadFile('%downloadlink%', '%downloadFolder%\%dlName%')"
+powershell -Command ^ [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; ^"(New-Object Net.WebClient).DownloadFile('%downloadlink%', '%downloadFolder%\%dlName%')"
 @TIMEOUT /t 1 /nobreak>nul
 powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%downloadFolder%\%dlName%', '%downloadFolder%\%dlName:~0,-4%'); }"
 @TIMEOUT /t 1 /nobreak>nul 
